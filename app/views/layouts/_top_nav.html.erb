@@ -26,8 +26,18 @@
           </ul>
         </li>
         <li>
-        <%= link_to 'About Us', :about %>
-      </li>
+          <%= link_to 'About Us', :about %>
+        </li>
+        <% if !current_user%>
+          <li>
+            <%= link_to 'Log In!', login_path %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to 'Log out', logout_path %>
+          </li>
+        <% end %>
+        
       </ul>
       <ul class="nav navbar-nav navbar-right">
        <li class="dropdown">
@@ -39,6 +49,7 @@
           <ul class="dropdown-menu">
             <li><%= link_to 'Dashboard', [:admin, :root] %></li>
             <li><%= link_to 'Products',  [:admin, :products] %></li>
+            <li><%= link_to 'Categories',  [:admin, :categories] %></li>
           </ul>
         </li>
         <li>
@@ -46,6 +57,16 @@
             <%= fa_icon "shopping-cart" %> My Cart (<%= cart.size %>)
           <% end %>
         </li>
+
+        <% if !current_user%>
+        <li>
+          <%= link_to 'Sign up!', signup_path %>
+        </li>
+      <% else %>
+        <li>
+          <a>Logged In As: <%= "#{current_user.first_name} #{current_user.last_name}"%></a>
+        </li>
+      <% end %>
       </ul>
     </div>
   </div>
